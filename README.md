@@ -1,3 +1,3 @@
 # Quickest-Way-Up
 
-This is a Proggramming test for DevCo.
+This is a Programming test for DevCo.
