@@ -4,6 +4,7 @@ import os
 import random
 import re
 import sys
+import dijkstra
 
 #
 # Complete the 'quickestWayUp' function below.
@@ -16,7 +17,7 @@ import sys
 
 def quickestWayUp(ladders, snakes):
     result = 0
-    
+    print(ladders)
     return -1
 
 def main():

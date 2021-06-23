@@ -120,9 +120,11 @@ if __name__=='__main__':
         for j in range(1,7):
             if i+j <= 99:
                 v[i].Add_child(i+j,1)
-    
 
-    
+    v[31].Add_child(61,1)
+    v[42].Add_child(68,1)
+    v[12].Add_child(98,1)
+
     path = [0 for i in range(len(v))]
     
     dist = dijkstraDist(v, s, path)
