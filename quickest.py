@@ -15,6 +15,8 @@ import sys
 #
 
 def quickestWayUp(ladders, snakes):
+    result = 0
+    
     return -1
 
 def main():
