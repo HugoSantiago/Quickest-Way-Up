@@ -121,22 +121,22 @@ if __name__=='__main__':
             if i+j <= 99:
                 v[i].Add_child(i+j,1)
 
-    v[31].Add_child(61,1)
-    v[42].Add_child(68,1)
-    v[12].Add_child(98,1)
+    v[31].Add_child(61,0)
+    v[42].Add_child(68,0)
+    v[12].Add_child(98,0)
 
     path = [0 for i in range(len(v))]
     
     dist = dijkstraDist(v, s, path)
-   
+    print(dist[-1])
     # Loop to print the distance of
     # every node from source vertex
-    for i in range(len(dist)):
-        if (dist[i] == infi):
-         
-            print("{0} and {1} are not " +
-                              "connected".format(i, s))
-            continue;       
-        print("Distance of {}th vertex from source vertex {} is: {}".format(
-                          i, s, dist[i]))
-     
+    #for i in range(len(dist)):
+    #    if (dist[i] == infi):
+    #     
+    #        print("{0} and {1} are not " +
+    #                          "connected".format(i, s))
+    #        continue;       
+    #    print("Distance of {}th vertex from source vertex {} is: {}".format(
+    #                      i, s, dist[i]))
+    
