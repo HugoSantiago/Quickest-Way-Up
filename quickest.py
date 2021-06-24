@@ -39,7 +39,7 @@ def dijkstraDist(g, s, path):
     while (True):
         visited[current] = True
         for i in range(len(g[current].children)): 
-            v = g[current].children[i].first;           
+            v = g[current].children[i].first
             if (visited[v]):
                 continue
             sett.add(v)
@@ -60,11 +60,10 @@ def dijkstraDist(g, s, path):
                 index = a;          
         current = index;  
     return dist
-      
+    
 def quickestWayUp(ladders, snakes):
-    result = -1
-    iniLadders = [i[0] for i in ladders]
-
+    iniLadders = [i[0]-1 for i in ladders]
+    iniSnakes = [i[0]-1 for i in snakes]
     v = []
     n = 100
     s = 0
@@ -73,20 +72,24 @@ def quickestWayUp(ladders, snakes):
         v.append(a)
     
     for i in range(n):
-        for j in range(1,7):
-            if i+j <= 99:
-                v[i].Add_child(i+j,1)
+        if i not in iniLadders and i not in iniSnakes:
+            for j in range(1,7):
+                if i+j <= 99:
+                    v[i].Add_child(i+j,1)
     
     for i in ladders:
-        v[i[0]].Add_child(i[1],0)
+        v[i[0]-1].Add_child(i[1]-1,0)
     
     for i in snakes:
-        v[i[0]].Add_child(i[1],0)
+        v[i[0]-1].Add_child(i[1]-1,0)
     
     path = [0 for i in range(len(v))]
     
-    result = dijkstraDist(v, s, path)[-1]
-    return result
+    dist = dijkstraDist(v, s, path)[-1]
+    
+    if dist == 1000000000:
+        dist = -1
+    return dist
 
 def main():
     fptr = open('myTest.txt', 'r')
