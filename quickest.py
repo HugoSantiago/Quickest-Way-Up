@@ -1,10 +1,5 @@
-
-import math
-import os
-import random
-import re
-import sys
-import dijkstra
+import Dijkstra.dijkstra
+import Dijkstra.Node
 
 #
 # Complete the 'quickestWayUp' function below.
@@ -13,86 +8,48 @@ import dijkstra
 # The function accepts following parameters:
 #  1. 2D_INTEGER_ARRAY ladders
 #  2. 2D_INTEGER_ARRAY snakes
-#
-class Pair:
-    def __init__(self, first, second):
-        self.first = first
-        self.second = second
-infi = 1000000000
-class Node:
-    def __init__(self, vertexNumber):       
-        self.vertexNumber = vertexNumber
-        self.children = []
-   
-    def Add_child(self, vNumber, length):   
-        p = Pair(vNumber, length)
-        self.children.append(p)
-def dijkstraDist(g, s, path):
-    dist = [infi for i in range(len(g))]
-    visited = [False for i in range(len(g))]
-    for i in range(len(g)):       
-        path[i] = -1
-    dist[s] = 0
-    path[s] = -1
-    current = s
-    sett = set()
-    while (True):
-        visited[current] = True
-        for i in range(len(g[current].children)): 
-            v = g[current].children[i].first
-            if (visited[v]):
-                continue
-            sett.add(v)
-            alt = dist[current] + g[current].children[i].second
-   
-            if (alt < dist[v]):      
-                dist[v] = alt
-                path[v] = current;       
-        if current in sett:           
-            sett.remove(current);       
-        if (len(sett) == 0):
-            break
-        minDist = infi
-        index = 0
-        for a in sett:       
-            if (dist[a] < minDist):          
-                minDist = dist[a]
-                index = a;          
-        current = index;  
-    return dist
-    
+#    
 def quickestWayUp(ladders, snakes):
+    # List of first elements in ladders
     iniLadders = [i[0]-1 for i in ladders]
+    # List of first elements in snakes
     iniSnakes = [i[0]-1 for i in snakes]
+    # Vertex
     v = []
+    # Number of nodes
     n = 100
+    # Source
     s = 0
+
     for i in range(n):
-        a = Node(i)
+        a = Dijkstra.Node.Node(i)
         v.append(a)
     
+    # Loading the graph with basic edges (the movement of the dize)
     for i in range(n):
         if i not in iniLadders and i not in iniSnakes:
             for j in range(1,7):
                 if i+j <= 99:
                     v[i].Add_child(i+j,1)
-    
+    # Loading the ladders nodes
     for i in ladders:
         v[i[0]-1].Add_child(i[1]-1,0)
     
+    # Loading the snake nodes
     for i in snakes:
         v[i[0]-1].Add_child(i[1]-1,0)
     
     path = [0 for i in range(len(v))]
     
-    dist = dijkstraDist(v, s, path)[-1]
+    dist = Dijkstra.dijkstra.dijkstraDist(v, s, path)[-1]
     
+    #In case the node is not reacheable 
     if dist == 1000000000:
         dist = -1
     return dist
 
 def main():
-    fptr = open('myTest.txt', 'r')
+    fptr = open('test_files/myTest.txt', 'r')
     
     t = int(fptr.readline().strip())
     
@@ -113,7 +70,6 @@ def main():
 
         result = quickestWayUp(ladders, snakes)
 
-        #fptr.write(str(result) + '\n')
         print(result)
 
     fptr.close()

@@ -2,28 +2,9 @@
 # shortest path in a directed
 # graph from source vertex to
 # the destination vertex
-class Pair:
-    def __init__(self, first, second):
-        self.first = first
-        self.second = second
+
 infi = 1000000000
-   
-# Class of the node
-class Node:
-   
-    # Adjacency list that shows the
-    # vertexNumber of child vertex
-    # and the weight of the edge   
-    def __init__(self, vertexNumber):       
-        self.vertexNumber = vertexNumber
-        self.children = []
-   
-    # Function to add the child for
-    # the given node
-    def Add_child(self, vNumber, length):   
-        p = Pair(vNumber, length)
-        self.children.append(p)
-       
+          
 # Function to find the distance of
 # the node from the given source
 # vertex to the destination vertex
@@ -102,41 +83,5 @@ def printPath(path, i, s):
         printPath(path, path[i], s)
         print(path[i] + " ")
       
-# Driver Code
-if __name__=='__main__':
-     
-    v = []
-    n = 100
-    s = 0
-   
-    # Loop to create the nodes
-    for i in range(n):
-        a = Node(i)
-        v.append(a)
-   
-    # Creating directed
-    # weighted edges
-    for i in range(n):
-        for j in range(1,7):
-            if i+j <= 99:
-                v[i].Add_child(i+j,1)
 
-    v[31].Add_child(61,0)
-    v[42].Add_child(68,0)
-    v[12].Add_child(98,0)
-
-    path = [0 for i in range(len(v))]
-    
-    dist = dijkstraDist(v, s, path)
-    print(dist[-1])
-    # Loop to print the distance of
-    # every node from source vertex
-    #for i in range(len(dist)):
-    #    if (dist[i] == infi):
-    #     
-    #        print("{0} and {1} are not " +
-    #                          "connected".format(i, s))
-    #        continue;       
-    #    print("Distance of {}th vertex from source vertex {} is: {}".format(
-    #                      i, s, dist[i]))
     
