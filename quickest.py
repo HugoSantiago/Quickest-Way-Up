@@ -73,6 +73,3 @@ def main():
         print(result)
 
     fptr.close()
-
-# Starting point
-main()
